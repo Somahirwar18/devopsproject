@@ -1,13 +1,8 @@
-FROM openjdk:8-alpine
+# Pull tomcat latest image from dockerhub 
+From tomcat:latest
 
-# Required for starting application up.
-RUN apk update && apk add /bin/sh
+# Maintainer
+MAINTAINER "somahirwar18" 
 
-RUN mkdir -p /opt/app
-ENV PROJECT_HOME /opt/app
-
-COPY target/jenkins-docker-k8s-project-1.0.jar $PROJECT_HOME/jenkins-docker-k8s-project-1.0.jar
-
-WORKDIR $PROJECT_HOME
-
-CMD ["java" ,"-jar","./jenkins-docker-k8s-project-1.0.jar"]
+# copy war file on to container 
+COPY ./webapp.war /usr/local/tomcat/webapps
